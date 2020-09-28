@@ -13,6 +13,9 @@
   <h1>Lista</h1>
   <ul id="lista"></ul>
 
+  <input class="add-element" type="text" placeholder="aggiungi elemento">
+  <a href="#" class="button">Add</a>
+
   <script id="entry-template" type="text/x-handlebars-template">
     {{#each data}}
       <li data-id={{this.id}}>{{this.text}} <span class="delete">X</span></li>

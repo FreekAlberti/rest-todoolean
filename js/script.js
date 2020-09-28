@@ -56,3 +56,35 @@ function deleteElement() {
     $(this).parent().remove();
   });
 }
+
+// aggiunge nuovo elemento alla lista
+function newElement() {
+  $(".button").click(function() {
+    var val = $(".add-element").val();
+    console.log(val);
+    // if (val != "") {
+    postAjax(val);
+    $(".add-element").val("");
+    // }
+
+  });
+}
+
+// chiamata ajax per generare nuovo elemento nel server
+function postAjax(val) {
+  $.ajax(
+    {
+      "url": "http://157.230.17.132:3002/todos",
+      "method": "POST",
+      "data" : {
+        "text": val
+      },
+      "success": function (data) {
+        console.log(data);
+      },
+      "error": function (richiesta, stato, errori) {
+        console.log(errori);
+      }
+    }
+  );
+}
