@@ -21,6 +21,22 @@ function getAjax() {
   );
 }
 
+// chiamata ajax per eliminare elemento selezionato dal server
+function deleteAjax(id) {
+  $.ajax(
+    {
+      "url": "http://157.230.17.132:3002/todos/" + id,
+      "method": "DELETE",
+      "success": function (data) {
+
+      },
+      "error": function (richiesta, stato, errori) {
+        console.log(errori);
+      }
+    }
+  );
+}
+
 // renderizza data nel dom con handlebars
 function render(data) {
   var source = $("#entry-template").html();
@@ -35,6 +51,8 @@ function render(data) {
 // elimina dalla lista elemento cliccato
 function deleteElement() {
   $("#lista").on("click", ".delete", function() {
+    var id = $("#lista").children(this).attr("data-id");
+    deleteAjax(id);
     $(this).parent().remove();
   });
 }

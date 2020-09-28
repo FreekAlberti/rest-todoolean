@@ -15,7 +15,7 @@
 
   <script id="entry-template" type="text/x-handlebars-template">
     {{#each data}}
-      <li>{{this.text}} <span class="delete">X</span></li>
+      <li data-id={{this.id}}>{{this.text}} <span class="delete">X</span></li>
     {{/each}}
   </script>
 
