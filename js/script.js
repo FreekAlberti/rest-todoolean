@@ -1,6 +1,9 @@
 $(document).ready(function() {
   getAjax();
-  deleteElement();
+  deleteElement()
+  newElementClick();
+  newElementEnter();
+  changeElement();
 });
 
 // FUNCTION
@@ -22,13 +25,13 @@ function getAjax() {
 }
 
 // chiamata ajax per eliminare elemento selezionato dal server
-function deleteAjax(id) {
+function deleteAjax(id,elm) {
   $.ajax(
     {
       "url": "http://157.230.17.132:3002/todos/" + id,
       "method": "DELETE",
       "success": function (data) {
-
+        elm.remove();
       },
       "error": function (richiesta, stato, errori) {
         console.log(errori);
@@ -51,22 +54,35 @@ function render(data) {
 // elimina dalla lista elemento cliccato
 function deleteElement() {
   $("#lista").on("click", ".delete", function() {
-    var id = $("#lista").children(this).attr("data-id");
-    deleteAjax(id);
-    $(this).parent().remove();
+    var elm = $(this).parent();
+    var id = elm.attr("data-id");
+    deleteAjax(id, elm);
   });
 }
 
-// aggiunge nuovo elemento alla lista
-function newElement() {
-  $(".button").click(function() {
+// aggiunge nuovo elemento alla lista con click bottone
+function newElementClick() {
+  $(".add").click(function() {
     var val = $(".add-element").val();
     console.log(val);
-    // if (val != "") {
-    postAjax(val);
-    $(".add-element").val("");
-    // }
+    if (val != "") {
+      postAjax(val);
+      $(".add-element").val("");
+    }
+  });
+}
 
+// aggiunge nuovo elemento alla lista con tasto enter
+function newElementEnter() {
+  $(document).keydown(function(e){
+    if (e.keyCode == 13) {
+      var val = $(".add-element").val();
+      console.log(val);
+      if (val != "") {
+        postAjax(val);
+        $(".add-element").val("");
+      }
+    }
   });
 }
 
@@ -87,4 +103,9 @@ function postAjax(val) {
       }
     }
   );
+}
+
+//modifica elemento presente nella lista
+function changeElement() {
+  
 }

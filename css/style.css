@@ -9,6 +9,12 @@
   cursor: pointer;
 }
 
+.change {
+  color: green;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
 .button {
   padding: 5px;
   border: 1px solid #000;
