@@ -3,8 +3,11 @@
   padding: 0;
   box-sizing: border-box;
 }
-
+.elm {
+  margin: 15px 0;
+}
 .delete {
+  margin-left: 5px;
   color: red;
   cursor: pointer;
 }

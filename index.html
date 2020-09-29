@@ -11,14 +11,16 @@
 </head>
 <body>
   <h1>Lista</h1>
-  <ul id="lista"></ul>
+  <div id="lista"></div>
 
   <input class="add-element" type="text" placeholder="aggiungi elemento">
   <a href="#" class="button add">Add</a>
 
   <script id="entry-template" type="text/x-handlebars-template">
     {{#each data}}
-      <li data-id={{this.id}}>{{this.text}} <span class="delete">X</span><span class="change">Change</span></li>
+    <div data-id={{this.id}} class="elm">
+      <input value="{{this.text}}"><span class="delete">X</span><span class="change">Change</span></input>
+    </div>
     {{/each}}
   </script>
 

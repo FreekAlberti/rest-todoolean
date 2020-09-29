@@ -1,6 +1,6 @@
 $(document).ready(function() {
   getAjax();
-  deleteElement()
+  deleteElement();
   newElementClick();
   newElementEnter();
   changeElement();
@@ -64,7 +64,6 @@ function deleteElement() {
 function newElementClick() {
   $(".add").click(function() {
     var val = $(".add-element").val();
-    console.log(val);
     if (val != "") {
       postAjax(val);
       $(".add-element").val("");
@@ -77,10 +76,8 @@ function newElementEnter() {
   $(document).keydown(function(e){
     if (e.keyCode == 13) {
       var val = $(".add-element").val();
-      console.log(val);
       if (val != "") {
         postAjax(val);
-        $(".add-element").val("");
       }
     }
   });
@@ -96,7 +93,10 @@ function postAjax(val) {
         "text": val
       },
       "success": function (data) {
-        console.log(data);
+        var newData = [];
+        newData.push(data);
+        render(newData);
+        $(".add-element").val("");
       },
       "error": function (richiesta, stato, errori) {
         console.log(errori);
@@ -107,5 +107,29 @@ function postAjax(val) {
 
 //modifica elemento presente nella lista
 function changeElement() {
-  
+  $("#lista").on("click", ".change", function() {
+    var elm = $(this).parent();
+    var elmVal = elm.children("input").val();
+    var id = elm.attr("data-id");
+    putAjax(id, elmVal);
+  });
+}
+
+// chiamata ajax modifica elemento esistente
+function putAjax(id, elmVal) {
+  $.ajax(
+    {
+      "url": "http://157.230.17.132:3002/todos/" + id,
+      "method": "PUT",
+      "data" : {
+        "text": elmVal
+      },
+      "success": function (data) {
+        alert("Elemento aggiornato");
+      },
+      "error": function (richiesta, stato, errori) {
+        console.log(errori);
+      }
+    }
+  );
 }
